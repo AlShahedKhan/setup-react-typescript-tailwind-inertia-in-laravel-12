@@ -37,12 +37,16 @@ $middleware->web(append: [
             HandleInertiaRequests::class
         ]);
 ```
+
 6. Give Client-side setup with npm via
+
 ```
 npm install @inertiajs/react react react-dom
 npm install -D @types/react @types/react-dom typescript @vitejs/plugin-react
 ```
+
 7. update vite.config.js like this
+
 ```
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
@@ -60,7 +64,9 @@ export default defineConfig({
     ],
 });
 ```
+
 8. Inside the “resources/js” folder, delete the app.js and create a new file named “app.tsx” with the next code inside
+
 ```
 import './bootstrap';
 import '../css/app.css';
@@ -78,7 +84,9 @@ createInertiaApp({
     },
 })
 ```
-9. create tsconfig.json 
+
+9. create tsconfig.json
+
 ```
 {
   "compilerOptions": {
@@ -92,3 +100,17 @@ createInertiaApp({
 }
 ```
 
+10. To call pages create resources/js/Pages/Index.tsx like this.
+
+11. In controller call inertia like this.
+
+```
+ public function index()
+    {
+        // Here we provide posts from the database to prop that we created in component
+        return Inertia::render('Index', [
+            'posts' => Post::all()
+        ]);
+    }
+```
+12. Tuotrial link https://medium.com/@demian.kostelny/laravel-inertia-js-react-simple-crud-example-2e0d167365d
