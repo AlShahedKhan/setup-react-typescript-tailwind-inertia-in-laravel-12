@@ -90,6 +90,32 @@ createInertiaApp({
 ```
 {
   "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "include": ["resources/js/**/*"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+and tsconfig.node.json
+```
+{
+  "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
