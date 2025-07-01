@@ -42,4 +42,53 @@ $middleware->web(append: [
 npm install @inertiajs/react react react-dom
 npm install -D @types/react @types/react-dom typescript @vitejs/plugin-react
 ```
+7. update vite.config.js like this
+```
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ["resources/css/app.css", "resources/js/app.js"],
+            refresh: true,
+        }),
+        react(),
+        tailwindcss(),
+    ],
+});
+```
+8. Inside the “resources/js” folder, delete the app.js and create a new file named “app.tsx” with the next code inside
+```
+import './bootstrap';
+import '../css/app.css';
+
+import React from 'react';
+import { createRoot} from 'react-dom/client';
+import { createInertiaApp } from '@inertiajs/react';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+
+createInertiaApp({
+    // Below you can see that we are going to get all React components from resources/js/Pages folder
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.tsx`,import.meta.glob('./Pages/**/*.tsx')),
+    setup({ el, App, props }) {
+        createRoot(el).render(<App {...props} />)
+    },
+})
+```
+9. create tsconfig.json 
+```
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.js"]
+}
+```
 
