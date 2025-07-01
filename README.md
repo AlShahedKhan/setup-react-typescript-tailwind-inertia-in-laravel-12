@@ -1,10 +1,14 @@
-#Setup React, TypeScript in laravel 12 project 
+#Setup React, TypeScript in laravel 12 project
+
 1. Create new project and cd to the new project
 2. Run this to setup inertia server-side in laravel 12
+
 ```
 composer require inertiajs/inertia-laravel
 ```
+
 3. Create app.blade.php in /views
+
 ```
 <!DOCTYPE html>
 <html>
@@ -22,3 +26,20 @@ composer require inertiajs/inertia-laravel
     </body>
 </html>
 ```
+
+4. Create its middleware via
+   `php artisan inertia:middleware`
+
+5. Register middleware via
+
+```
+$middleware->web(append: [
+            HandleInertiaRequests::class
+        ]);
+```
+6. Give Client-side setup with npm via
+```
+npm install @inertiajs/react react react-dom
+npm install -D @types/react @types/react-dom typescript @vitejs/plugin-react
+```
+
